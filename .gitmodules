@@ -1,0 +1,4 @@
+[submodule "nexa"]
+	path = nexa
+	url = git@gitlab.com:ggriffith/nexa.git
+	branch = cashlib-mini

@@ -25,7 +25,7 @@
                 "USB_SEGMENT_SIZE=64",
                 "UNUSED(x)=(void)x",
                 "APPVERSION=\"1.0.0\"",
-                "APPNAME=\"Boilerplate\"",
+                "APPNAME=\"Nexa\"",
                 "MAJOR_VERSION=1",
                 "MINOR_VERSION=0",
                 "PATCH_VERSION=0",
@@ -42,7 +42,8 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
-            }
+            },
+            "configurationProvider": "ms-vscode.makefile-tools"
         }
     ],
     "version": 4

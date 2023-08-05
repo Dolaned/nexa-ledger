@@ -27,6 +27,7 @@
 #include "sw.h"
 #include "ui/menu.h"
 #include "apdu/dispatcher.h"
+#include "../libs/cashlib-lite.h"
 
 global_ctx_t G_context;
 
@@ -38,6 +39,11 @@ void app_main() {
     int input_len = 0;
     // Structured APDU command
     command_t cmd;
+
+    unsigned char buffer[10];
+
+    int numRandomBytes = 10;
+    int result = RandomBytes(buffer, numRandomBytes);
 
     io_init();
 

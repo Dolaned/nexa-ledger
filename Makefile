@@ -18,14 +18,14 @@
 ifeq ($(BOLOS_SDK),)
 $(error Environment variable BOLOS_SDK is not set)
 endif
-
 include $(BOLOS_SDK)/Makefile.defines
+$(warning $(BOLOS_SDK))
 
 ########################################
 #        Mandatory configuration       #
 ########################################
 # Application name
-APPNAME = "Boilerplate"
+APPNAME = "Nexa"
 
 # Application version
 APPVERSION_M = 1
@@ -56,8 +56,12 @@ CURVE_APP_LOAD_PARAMS = secp256k1
 # and SLIP-0044 standards.
 # If your app needs it, you can specify multiple path by using:
 # `PATH_APP_LOAD_PARAMS = "44'/1'" "45'/1'"`
-PATH_APP_LOAD_PARAMS = "44'/1'"   # purpose=coin(44) / coin_type=Testnet(1)
 
+#MainNet
+PATH_APP_LOAD_PARAMS = "44'/29223'"   # purpose=coin(44) / coin_type=Testnet(1)
+
+#Testnet
+PATH_APP_LOAD_PARAMS = "44'/29224'"   # purpose=coin(44) / coin_type=Testnet(1)
 # Setting to allow building variant applications
 # - <VARIANT_PARAM> is the name of the parameter which should be set
 #   to specify the variant that should be build.
@@ -65,10 +69,10 @@ PATH_APP_LOAD_PARAMS = "44'/1'"   # purpose=coin(44) / coin_type=Testnet(1)
 #   * It must at least contains one value.
 #   * Values can be the app ticker or anything else but should be unique.
 VARIANT_PARAM = COIN
-VARIANT_VALUES = BOL
+VARIANT_VALUES = NEXA
 
 # Enabling DEBUG flag will enable PRINTF and disable optimizations
-#DEBUG = 1
+DEBUG = 1
 
 ########################################
 #     Application custom permissions   #
@@ -105,4 +109,17 @@ ENABLE_NBGL_QRCODE = 1
 #DISABLE_STANDARD_WEBUSB = 1
 #DISABLE_STANDARD_BAGL_UX_FLOW = 1
 
+# CFLAGS += -fno-stack-protector
+
+include nexa/src/cashlib-lite/Makefile_ledger_arm
+LIBB = nexa/src/cashlib-lite/
+LIBINCLUDE = nexa/src/cashlib-lite/
+
+CFLAGS += -I$(LIBINCLUDE)
+LDFLAGS += -L$(LIBB)
+
+LDFLAGS+= -static -lnexa
+# $(warning $(LDFLAGS))
+# $(warning $(CFLAGS))
+# $(warning $(BOLOS_SDK))
 include $(BOLOS_SDK)/Makefile.standard_app
