@@ -19,7 +19,6 @@ ifeq ($(BOLOS_SDK),)
 $(error Environment variable BOLOS_SDK is not set)
 endif
 include $(BOLOS_SDK)/Makefile.defines
-$(warning $(BOLOS_SDK))
 
 ########################################
 #        Mandatory configuration       #
@@ -109,17 +108,9 @@ ENABLE_NBGL_QRCODE = 1
 #DISABLE_STANDARD_WEBUSB = 1
 #DISABLE_STANDARD_BAGL_UX_FLOW = 1
 
-# CFLAGS += -fno-stack-protector
+LDFLAGS  += -L/libs/
+LDLIBS +=  libs/libnexa_ledger_arm.a
 
-include nexa/src/cashlib-lite/Makefile_ledger_arm
-LIBB = nexa/src/cashlib-lite/
-LIBINCLUDE = nexa/src/cashlib-lite/
-
-CFLAGS += -I$(LIBINCLUDE)
-LDFLAGS += -L$(LIBB)
-
-LDFLAGS+= -static -lnexa
-# $(warning $(LDFLAGS))
-# $(warning $(CFLAGS))
-# $(warning $(BOLOS_SDK))
+$(warning $(BOLOS_SDK))
+$(warning $(PWD))
 include $(BOLOS_SDK)/Makefile.standard_app

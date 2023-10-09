@@ -40,10 +40,9 @@ void app_main() {
     // Structured APDU command
     command_t cmd;
 
-    unsigned char buffer[10];
 
-    int numRandomBytes = 10;
-    int result = RandomBytes(buffer, numRandomBytes);
+    int result = 0;
+    result =  ledgerTestFunction(1);
 
     io_init();
 
